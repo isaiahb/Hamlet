@@ -1,4 +1,4 @@
-package com.iball.hamlet.screens.instances.horatio;
+package com.iball.hamlet.screens.instances.rg;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -18,7 +18,7 @@ import com.iball.hamlet.screens.instances.Instance;
 //to go to next dialog press space
 //to go to next cut scene animation press enter
 
-public class HoratioAnticDispositionInstance extends Instance {
+public class RGJustSawGhostInstance extends Instance {
 	Player player;
 	public Main main;
 	Stage stage;
@@ -31,7 +31,7 @@ public class HoratioAnticDispositionInstance extends Instance {
 	final int VELOCITY_ITERATIONS = 6;
 	final int POSITION_ITERATIONS = 2;
 	float accumulator = 0;
-	int textures = 10;
+	int textures = 1;
 	Texture[] backgrounds = new Texture[textures];
 	int textureIndex = 0;
 
@@ -39,50 +39,25 @@ public class HoratioAnticDispositionInstance extends Instance {
 	DialogManager dialogManager;
 
 
-	public HoratioAnticDispositionInstance(Main main) {
+	public RGJustSawGhostInstance(Main main) {
 		this.main = main;
 		//no character in this instance
 		//player = new Player(Character.Hamlet, world);
 
 		main.box2DCamera.zoom = 0.5f;
-		ChatDialog hamlet = new ChatDialog(Character.Hamlet);
-		ChatDialog horatio = new ChatDialog(Character.Horatio);
-		ChatDialog ghost = new ChatDialog(Character.Ghost);
+		ChatDialog rg = new ChatDialog(Character.RG);
+		ChatDialog h = new ChatDialog(Character.Horatio);
 		dialogManager = new DialogManager(main);
 
-		dialogManager.addDialog(horatio, "What happened, sir?");
-		dialogManager.addDialog(hamlet, "It was incredible!");
-		dialogManager.addDialog(hamlet, "Horatio, you must promise not to speak of any thing you saw tonight");
-		dialogManager.addDialog(horatio, "I won't");
-		dialogManager.addDialog(ghost, "Swear!");
-		dialogManager.addDialog(horatio, "whoa!, I swear I shall not speak of it");
-		dialogManager.addDialog(hamlet, "Good");
-		dialogManager.addDialog(hamlet, "my father has revealed to me that he was poisoned by Claudius");
-		dialogManager.addDialog(hamlet, "I plan on avenging my father's murder");
-		dialogManager.addDialog(hamlet, "I may find it appropriate to act crazy in the near future, to avoid suspision I will put on an antic dispotition");
-		dialogManager.addDialog(horatio, "I got you man");
-
-		dialogManager.addDialog(hamlet, "What did you do?");
-		dialogManager.addDialog(horatio, "This one spell I learned effects the mind");
-		dialogManager.addDialog(horatio, "You won't need to put on a disposition");
-
-		dialogManager.addDialog(horatio, "but, beware. You may see and feel things that are not there");
-		dialogManager.addDialog(hamlet, "...");
+		dialogManager.addDialog(rg, "Yo Horatio help, i was just being chased by King Hamlet's ghost");
+		dialogManager.addDialog(h, "Relax you are most likely just seeing things, I don't see any ghost");
+		dialogManager.addDialog(h, "Clearly you took to much of that pain medication");
+		dialogManager.addDialog(rg, "oh, yea. ok that makes sense");
 
 		dialogManager.startDialogs();
 		dialogManager.nextDialog();
 
-		backgrounds[0] = new Texture("Horatio/H1.png");
-		backgrounds[1] = new Texture("Horatio/H2.png");
-		backgrounds[2] = new Texture("Horatio/H1.png");
-		backgrounds[3] = new Texture("Horatio/H2.png");
-		backgrounds[4] = new Texture("Horatio/H1.png");
-		backgrounds[5] = new Texture("Horatio/H2.png");
-
-		backgrounds[6] = new Texture("Horatio/H5.png");
-		backgrounds[7] = new Texture("Horatio/H2.png");
-		backgrounds[8] = new Texture("Horatio/H5.png");
-		backgrounds[9] = new Texture("Horatio/H2.png");
+		backgrounds[0] = new Texture("RG/RGH.png");
 		main.box2DCamera.zoom = (1);
 		main.box2DViewPort.update(128, 64, true);
 		main.box2DViewPort.setUnitsPerPixel(1/6f);

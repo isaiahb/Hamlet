@@ -33,7 +33,7 @@ public class DialogManager {
 		label.setWidth(Gdx.graphics.getWidth() - 80);
 		stage = new Stage(main.viewPort);
 		stage.addActor(label);
-		dialogBackgroundColor = new Color(0, 0, 0, 0.75f);
+		dialogBackgroundColor = new Color(0, 0, 0, 0.635f);
 		dialogs.add(null);
 		nextDialog();
 	}
@@ -92,6 +92,10 @@ public class DialogManager {
 
 		stage.draw();
 
+	}
+
+	public void dispose() {
+		stage.dispose();
 	}
 }
 

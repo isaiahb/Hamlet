@@ -35,7 +35,7 @@ public class Player {
 
 	TextureRegion currentFrame;
 	float stateTime = 0f;
-	float speed = 15;
+	float speed = 55;
 
 	public Player(Character character, World world) {
 		this.character = character;

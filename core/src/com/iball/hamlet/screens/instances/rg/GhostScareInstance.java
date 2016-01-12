@@ -2,7 +2,9 @@ package com.iball.hamlet.screens.instances.rg;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
@@ -18,8 +20,9 @@ import com.iball.hamlet.screens.instances.Instance;
 //to go to next dialog press space
 //to go to next cut scene animation press enter
 
-public class GoodStuffInstance extends Instance {
+public class GhostScareInstance extends Instance {
 	Player player;
+	Player ghost;
 	public Main main;
 	Stage stage;
 
@@ -31,45 +34,33 @@ public class GoodStuffInstance extends Instance {
 	final int VELOCITY_ITERATIONS = 6;
 	final int POSITION_ITERATIONS = 2;
 	float accumulator = 0;
-	Texture[] backgrounds = new Texture[4];
-	int textureIndex = 0;
 
 	//Dialog Manager
 	DialogManager dialogManager;
 
 
-	public GoodStuffInstance(Main main) {
+	public GhostScareInstance(Main main) {
 		this.main = main;
 		//no character in this instance
-		//player = new Player(Character.Hamlet, world);
+		player = new Player(Character.RG, world);
+		ghost = new Player(Character.Ghost, world);
+		ghost.body.setTransform(5, 0, 0);
 
-		main.box2DCamera.zoom = 0.5f;
-		ChatDialog RGDialog = new ChatDialog(Character.RG);
-		ChatDialog HoratioDialog = new ChatDialog(Character.Horatio);
+		ChatDialog rg = new ChatDialog(Character.RG);
+		ChatDialog g = new ChatDialog(Character.Ghost);
 		dialogManager = new DialogManager(main);
-		dialogManager.addDialog(RGDialog, "Yooooo Horatio my man whats up, how you been?");
-		dialogManager.addDialog(HoratioDialog, "Hello RG. I'm fine, How are you?");
-		dialogManager.addDialog(RGDialog, "oh cool, i'm alright");
-		dialogManager.addDialog(RGDialog, "Hey Horatio, my man do you have any of that good stuff?");
-		dialogManager.addDialog(HoratioDialog, "What are you talking about?");
-		dialogManager.addDialog(RGDialog, "yo, I hurt my back I need some medicine or whatevs for pain");
-		dialogManager.addDialog(HoratioDialog, "Yeah don't worry I got you fam.");
-		dialogManager.pause();
-		dialogManager.addDialog(RGDialog, "Thanks bro");
-		dialogManager.addDialog(RGDialog, "I gotta go talk to Claudius. I'll see you and Hamlet later");
-		dialogManager.addDialog(RGDialog, "PEACE!");
+
+		dialogManager.addDialog(rg, "what the!, is that the dead King Hamlet?");
+		dialogManager.addDialog(g, "boo!");
+		dialogManager.addDialog(rg, "AHHH!!!");
 
 		dialogManager.startDialogs();
 		dialogManager.nextDialog();
 
-		backgrounds[0] = new Texture("RG/RG1.png");
-		backgrounds[1] = new Texture("RG/RG2.png");
-		backgrounds[2] = new Texture("RG/RG3.png");
-		backgrounds[3] = new Texture("RG/RG4.png");
-
+		//main.box2DCamera.zoom = 0.5f;
 		main.box2DCamera.zoom = (1);
 		main.box2DViewPort.update(128, 64, true);
-		main.box2DViewPort.setUnitsPerPixel(1/6f);
+		main.box2DViewPort.setUnitsPerPixel(1/16f);
 		main.box2DCamera.update();
 	}
 
@@ -77,19 +68,17 @@ public class GoodStuffInstance extends Instance {
 		if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
 			dialogManager.nextDialog();
 		}
-		if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
-			if (textureIndex < 3) textureIndex++;
-		}
+
 	}
 
 	public void updatePlayer() {
 
 		//update player
 		//no player in this instance
-		//player.update(TIME_STEP);
+		player.update(TIME_STEP);
 
 		//update camera to follow player
-		//main.box2DCamera.position.set(player.body.getPosition(), 1);
+		main.box2DCamera.position.set(player.body.getPosition(), 1);
 		main.box2DCamera.update();
 	}
 
@@ -107,14 +96,15 @@ public class GoodStuffInstance extends Instance {
 
 		}
 	}
-
 	public void render() {
-		main.batch.setProjectionMatrix(main.box2DCamera.combined);
-		main.batch.begin();
-		main.batch.draw(backgrounds[textureIndex], 0, 0);
-		main.batch.end();
+		main.shapeRenderer.setProjectionMatrix(main.box2DCamera.combined);
+		main.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+		main.shapeRenderer.setColor(main.darkGreen);
+		main.shapeRenderer.rect(0, 0, main.box2DCamera.viewportWidth, main.box2DCamera.viewportHeight);
+		main.shapeRenderer.end();
 
-		//player.render(main.batch, main.box2DCamera);
+		player.render(main.batch, main.box2DCamera);
+		ghost.render(main.batch, main.box2DCamera);
 		dialogManager.render(main.camera, main.shapeRenderer, main.batch);
 //		debugRenderer.render(world, main.box2DCamera.combined);
 	}
