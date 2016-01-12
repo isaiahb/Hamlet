@@ -47,12 +47,24 @@ public class HoratioAnticDispositionInstance extends Instance {
 		main.box2DCamera.zoom = 0.5f;
 		ChatDialog hamlet = new ChatDialog(Character.Hamlet);
 		ChatDialog horatio = new ChatDialog(Character.Horatio);
+		ChatDialog ghost = new ChatDialog(Character.Ghost);
 		dialogManager = new DialogManager(main);
 
-		dialogManager.addDialog(horatio, "Did you talk with the ghost");
-		dialogManager.addDialog(horatio, "Did you talk with the ghost");
+		dialogManager.addDialog(horatio, "What happened, sir?");
+		dialogManager.addDialog(hamlet, "It was incredible!");
+		dialogManager.addDialog(hamlet, "Horatio, you must promise not to speak of any thing you saw tonight");
+		dialogManager.addDialog(horatio, "I won't");
+		dialogManager.addDialog(ghost, "Swear!");
+		dialogManager.addDialog(horatio, "who, I swear I shall not speak of it");
+		dialogManager.addDialog(hamlet, "Good");
+		dialogManager.addDialog(hamlet, "my father has revealed to me that he was poisoned by Claudius");
+		dialogManager.addDialog(hamlet, "I plan on avenging my father's murder");
+		dialogManager.addDialog(hamlet, "I may find it appropriate to act crazy in the near future, to avoid suspision I will put on an antic dispotition");
+		dialogManager.addDialog(horatio, "I got you man");
 
-
+		dialogManager.addDialog(hamlet, "What did you do?");
+		dialogManager.addDialog(horatio, "This one spell I learned effects the mind");
+		dialogManager.addDialog(horatio, "You won't need to put on a disposition");
 
 		dialogManager.startDialogs();
 		dialogManager.nextDialog();
