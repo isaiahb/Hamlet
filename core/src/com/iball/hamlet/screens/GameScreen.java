@@ -6,6 +6,7 @@ import com.iball.hamlet.screens.instances.Instance;
 import com.iball.hamlet.screens.instances.claudius.ClaudiusHamletInstance;
 import com.iball.hamlet.screens.instances.claudius.ClaudiusLaertesInstance;
 import com.iball.hamlet.screens.instances.hamlet.HamletChurchClaudiusInstance;
+import com.iball.hamlet.screens.instances.horatio.HoratioAnticDispositionInstance;
 import com.iball.hamlet.screens.instances.laertes.LaertesDeathInstance;
 import com.iball.hamlet.screens.instances.rg.GoodStuffInstance;
 
@@ -21,6 +22,7 @@ public class GameScreen implements Screen {
 		currentInstance = new ClaudiusHamletInstance(main);
 		currentInstance = new HamletChurchClaudiusInstance(main);
 		currentInstance = new LaertesDeathInstance(main);
+		currentInstance = new HoratioAnticDispositionInstance(main);
 	}
 	@Override
 	public void show() {
@@ -56,7 +58,6 @@ public class GameScreen implements Screen {
 
 	@Override
 	public void dispose() {
-		this.dispose();
 		currentInstance.dispose();
 	}
 }
